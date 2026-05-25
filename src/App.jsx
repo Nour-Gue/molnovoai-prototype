@@ -118,6 +118,7 @@ export default function App() {
 
         <div className="hidden md:flex gap-6 text-slate-300 text-sm">
           <a href="#workflow" className="hover:text-cyan-400">Workflow</a>
+          <a href="#plans" className="hover:text-cyan-400">Plans</a>
           <a href="#tools" className="hover:text-cyan-400">Tools</a>
           <a href="#demo" className="hover:text-cyan-400">Demo</a>
           <a href="#contact" className="hover:text-cyan-400">Contact</a>
@@ -208,7 +209,100 @@ export default function App() {
 ))}
         </div>
       </section>
+      <section id="plans" className="px-8 py-20 bg-slate-950">
+  <h2 className="text-3xl font-bold text-center mb-4">
+    Flexible Access Plans
+  </h2>
 
+  <p className="text-slate-400 text-center max-w-2xl mx-auto mb-12">
+    Designed for students, academic researchers, and laboratories exploring AI-driven drug discovery and molecular design.
+  </p>
+
+  <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8">
+      <h3 className="text-2xl font-bold mb-2">
+        Student Plan
+      </h3>
+
+      <p className="text-slate-400 mb-4">
+        Chemistry & Biology Students
+      </p>
+
+      <p className="text-4xl font-bold text-cyan-400 mb-6">
+        Free
+      </p>
+
+      <ul className="space-y-3 text-slate-300 mb-8">
+        <li>Prototype Molecule Generation</li>
+        <li>Educational Workflow Access</li>
+        <li>Limited QSAR Predictions</li>
+        <li>Demo Candidate Ranking</li>
+      </ul>
+
+      <button className="w-full py-3 rounded-xl bg-white text-slate-950 font-bold">
+        Start Free
+      </button>
+    </div>
+
+    <div className="bg-cyan-400 text-slate-950 border border-cyan-300 rounded-3xl p-8 scale-105">
+      <div className="inline-block bg-slate-950 text-cyan-400 px-4 py-1 rounded-full text-sm font-bold mb-4">
+        Most Popular
+      </div>
+
+      <h3 className="text-2xl font-bold mb-2">
+        Researcher Plan
+      </h3>
+
+      <p className="text-slate-800 mb-4">
+        Academic Researchers & University Labs
+      </p>
+
+      <p className="text-4xl font-bold mb-6">
+        Academic Access
+      </p>
+
+      <ul className="space-y-3 mb-8">
+        <li>Multiple Candidate Generation</li>
+        <li>QSAR Ranking by Predicted pIC50</li>
+        <li>Exportable Molecular Results</li>
+        <li>ADMET Module Preview</li>
+        <li>Research Collaboration Support</li>
+      </ul>
+
+      <button className="w-full py-3 rounded-xl bg-slate-950 text-cyan-400 font-bold">
+        Request Access
+      </button>
+    </div>
+
+    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8">
+      <h3 className="text-2xl font-bold mb-2">
+        Lab / Enterprise
+      </h3>
+
+      <p className="text-slate-400 mb-4">
+        Research Labs & Biotechnology Teams
+      </p>
+
+      <p className="text-4xl font-bold text-cyan-400 mb-6">
+        Custom
+      </p>
+
+      <ul className="space-y-3 text-slate-300 mb-8">
+        <li>Large-Scale Virtual Screening</li>
+        <li>Advanced Optimization Workflows</li>
+        <li>Docking Integration</li>
+        <li>Custom Target Projects</li>
+        <li>Priority Technical Support</li>
+      </ul>
+
+      <button className="w-full py-3 rounded-xl bg-white text-slate-950 font-bold">
+        Contact Us
+      </button>
+    </div>
+
+  </div>
+</section>
       <section id="demo" className="px-8 py-20 bg-slate-900">
         <h2 className="text-3xl font-bold text-center mb-4">
           Interactive Prototype Demo
@@ -228,7 +322,7 @@ export default function App() {
            <input
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Generate natural-product-like COX-2 inhibitors"
+            placeholder="COX2; heavy_atoms: 30; heteroatoms: 4; rings: 1; aromatic_rings: 1; MW: 400.55; logP: 5.20; TPSA: 60.30; HBD: 2; HBA: 3; RB: 12; fraction_Csp3: 0.55; formal_charge: 0; Lipinski_violations: 1ِ"
             className="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-cyan-400"
            />
 
