@@ -16,42 +16,84 @@ export default function App() {
   const [numMolecules, setNumMolecules] = useState(10);
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(false);
-  const runDemo = () => {
-    setLoading(true);
-    setCandidates([]);
-  
-    setTimeout(() => {
-      setCandidates([
-        {
-          smiles: "COc1ccccc1C1Oc2ccccc2C(c2ccccc2)O1",
-          predicted_pIC50: 7.842,
-          status: "Predicted Active",
-        },
-        {
-          smiles: "CC(=O)Nc1ccc(O)c(OC)c1",
-          predicted_pIC50: 7.315,
-          status: "Predicted Active",
-        },
-        {
-          smiles: "COc1ccc(NC(=O)c2ccccc2)cc1",
-          predicted_pIC50: 6.984,
-          status: "Moderately Active",
-        },
-        {
-          smiles: "CC(C)NC(=O)c1ccc(O)cc1",
-          predicted_pIC50: 6.721,
-          status: "Moderately Active",
-        },
-        {
-          smiles: "COc1ccccc1[C@@H]1Oc2ccccc2C(O)C1",
-          predicted_pIC50: 6.438,
-          status: "Moderate/Low Activity",
-        },
-      ]);
-      setLoading(false);
-    }, 1200);
-  };
+  const [loggedIn, setLoggedIn] = useState(false);
 
+  if (!loggedIn) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center px-6">
+        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-10 w-full max-w-md">
+  
+          <h1 className="text-4xl font-bold text-center mb-3 text-cyan-400">
+            MolNovoAI
+          </h1>
+  
+          <p className="text-slate-400 text-center mb-8">
+            AI-Powered De Novo Drug Discovery Platform
+          </p>
+  
+          <input
+            type="email"
+            placeholder="Email Address"
+            className="w-full mb-4 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700"
+          />
+  
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full mb-6 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700"
+          />
+  
+          <button
+            onClick={() => setLoggedIn(true)}
+            className="w-full py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold hover:scale-105 transition"
+          >
+            Access Platform
+          </button>
+  
+          <p className="text-center text-slate-500 text-sm mt-5">
+            Prototype Access Portal
+          </p>
+  
+        </div>
+      </div>
+    );
+  }
+  const runDemo = async () => {
+    setLoading(true);
+  
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+  
+    setCandidates([
+      {
+        smiles: "CC(=O)Oc1ccccc1C(=O)O",
+        predicted_pIC50: 8.42,
+        status: "Predicted Active",
+      },
+      {
+        smiles: "COc1ccc2nc(S(N)(=O)=O)sc2c1",
+        predicted_pIC50: 8.11,
+        status: "Predicted Active",
+      },
+      {
+        smiles: "CCN(CC)CCOc1ccc2nc(N)sc2c1",
+        predicted_pIC50: 7.95,
+        status: "Predicted Active",
+      },
+      {
+        smiles: "Oc1ccc(-c2cc(O)cc(O)c2O)cc1",
+        predicted_pIC50: 7.54,
+        status: "Moderate Activity",
+      },
+      {
+        smiles: "COc1ccccc1C(=O)Nc1nccs1",
+        predicted_pIC50: 7.21,
+        status: "Moderate Activity",
+      },
+    ]);
+  
+    setLoading(false);
+  };
+  
   const steps = [
     {
       title: "Data Collection",
@@ -88,6 +130,11 @@ export default function App() {
       icon: <ShieldCheck size={30} />,
       text: "Evaluate absorption, distribution, metabolism, excretion, and toxicity properties to prioritize safer drug candidates.",
     },
+    {
+      title: "Dynamics",
+      icon: <Activity size={32} />,
+      text: "Assess protein–ligand complex stability through Molecular Dynamics simulations.",
+    },
   ];
   const tools = [
     {
@@ -103,9 +150,9 @@ export default function App() {
       desc: "Improves molecular properties and drug-likeness.",
     },
     {
-      name: "Docking & ADMET",
-      desc: "Molecular docking performed using external software and web-based ADMET evaluation tools.",
-    },
+      name: "Molecular Docking, ADMET & Dynamics",
+      desc: "Combines protein–ligand docking, ADMET prediction, and molecular dynamics simulations to evaluate binding affinity, pharmacokinetics, toxicity, and complex stability over time.",
+    }
   ];
 
   return (
@@ -209,65 +256,88 @@ export default function App() {
 ))}
         </div>
       </section>
-      <section id="plans" className="px-8 py-20 bg-slate-950">
+<section id="plans" className="px-8 py-20 bg-slate-950">
+
   <h2 className="text-3xl font-bold text-center mb-4">
     Flexible Access Plans
   </h2>
 
   <p className="text-slate-400 text-center max-w-2xl mx-auto mb-12">
-    Designed for students, academic researchers, and laboratories exploring AI-driven drug discovery and molecular design.
+    Designed for students, researchers, and biotech teams exploring AI-driven drug discovery.
   </p>
 
   <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
 
-    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h3 className="text-2xl font-bold mb-2">
+    {/* FREE PLAN */}
+    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 hover:scale-105 transition">
+
+      <div className="text-center mb-4">
+        <span className="text-sm text-emerald-400 font-bold bg-emerald-400/10 px-3 py-1 rounded-full">
+          Free Plan
+        </span>
+      </div>
+
+      <h3 className="text-2xl font-bold mb-2 text-center">
         Student Plan
       </h3>
 
-      <p className="text-slate-400 mb-4">
-        Chemistry & Biology Students
+      <p className="text-slate-400 mb-4 text-center">
+        Learning & Academic Exploration
       </p>
 
-      <p className="text-4xl font-bold text-cyan-400 mb-6">
-        Free
-      </p>
+      <div className="text-center mb-6">
+        <div className="text-4xl font-bold text-emerald-400">
+          0 DA / $0
+        </div>
+        <p className="text-slate-500 text-sm">
+          Completely Free
+        </p>
+      </div>
 
-      <ul className="space-y-3 text-slate-300 mb-8">
-        <li>Prototype Molecule Generation</li>
-        <li>Educational Workflow Access</li>
-        <li>Limited QSAR Predictions</li>
-        <li>Demo Candidate Ranking</li>
+      <ul className="space-y-3 text-slate-300 mb-8 text-sm">
+        <li>• Prototype Molecule Generation</li>
+        <li>• Educational Workflow Access</li>
+        <li>• Limited QSAR Predictions</li>
+        <li>• Demo Candidate Ranking</li>
       </ul>
 
-      <button className="w-full py-3 rounded-xl bg-white text-slate-950 font-bold">
+      <button className="w-full py-3 rounded-xl bg-emerald-400 text-slate-950 font-bold">
         Start Free
       </button>
     </div>
 
-    <div className="bg-cyan-400 text-slate-950 border border-cyan-300 rounded-3xl p-8 scale-105">
-      <div className="inline-block bg-slate-950 text-cyan-400 px-4 py-1 rounded-full text-sm font-bold mb-4">
-        Most Popular
+    {/* RESEARCHER PLAN */}
+    <div className="bg-cyan-400 text-slate-950 border border-cyan-300 rounded-3xl p-8 scale-105 shadow-xl">
+
+      <div className="text-center mb-4">
+        <span className="bg-slate-950 text-cyan-400 px-3 py-1 rounded-full text-sm font-bold">
+          Most Popular
+        </span>
       </div>
 
-      <h3 className="text-2xl font-bold mb-2">
+      <h3 className="text-2xl font-bold mb-2 text-center">
         Researcher Plan
       </h3>
 
-      <p className="text-slate-800 mb-4">
-        Academic Researchers & University Labs
+      <p className="text-slate-800 mb-4 text-center">
+        Universities & Academic Labs
       </p>
 
-      <p className="text-4xl font-bold mb-6">
-        Academic Access
-      </p>
+      <div className="text-center mb-6">
+        <div className="text-4xl font-bold">
+          15,000 DA
+        </div>
+        <p className="text-slate-800 text-sm">
+          / month (≈ $49)
+        </p>
+      </div>
 
-      <ul className="space-y-3 mb-8">
-        <li>Multiple Candidate Generation</li>
-        <li>QSAR Ranking by Predicted pIC50</li>
-        <li>Exportable Molecular Results</li>
-        <li>ADMET Module Preview</li>
-        <li>Research Collaboration Support</li>
+      <ul className="space-y-3 mb-8 text-sm">
+        <li>• Multiple Candidate Generation</li>
+        <li>• QSAR Ranking (pIC50)</li>
+        <li>• Exportable Molecular Results</li>
+        <li>• ADMET Module Preview</li>
+        <li>• Research Collaboration Support</li>
       </ul>
 
       <button className="w-full py-3 rounded-xl bg-slate-950 text-cyan-400 font-bold">
@@ -275,34 +345,48 @@ export default function App() {
       </button>
     </div>
 
-    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-      <h3 className="text-2xl font-bold mb-2">
+    {/* ENTERPRISE PLAN */}
+    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 hover:scale-105 transition">
+
+      <div className="text-center mb-4">
+        <span className="text-sm text-purple-400 font-bold bg-purple-400/10 px-3 py-1 rounded-full">
+          Enterprise
+        </span>
+      </div>
+
+      <h3 className="text-2xl font-bold mb-2 text-center">
         Lab / Enterprise
       </h3>
 
-      <p className="text-slate-400 mb-4">
-        Research Labs & Biotechnology Teams
+      <p className="text-slate-400 mb-4 text-center">
+        Biotech & Pharma Teams
       </p>
 
-      <p className="text-4xl font-bold text-cyan-400 mb-6">
-        Custom
-      </p>
+      <div className="text-center mb-6">
+        <div className="text-4xl font-bold text-purple-400">
+          Custom
+        </div>
+        <p className="text-slate-500 text-sm">
+          From 40,000 DA / $199+
+        </p>
+      </div>
 
-      <ul className="space-y-3 text-slate-300 mb-8">
-        <li>Large-Scale Virtual Screening</li>
-        <li>Advanced Optimization Workflows</li>
-        <li>Docking Integration</li>
-        <li>Custom Target Projects</li>
-        <li>Priority Technical Support</li>
+      <ul className="space-y-3 text-slate-300 mb-8 text-sm">
+        <li>• Large-Scale Virtual Screening</li>
+        <li>• Advanced Optimization Workflows</li>
+        <li>• Docking Integration</li>
+        <li>• Custom Target Projects</li>
+        <li>• Priority Technical Support</li>
       </ul>
 
       <button className="w-full py-3 rounded-xl bg-white text-slate-950 font-bold">
-        Contact Us
+        Contact Sales
       </button>
     </div>
 
   </div>
 </section>
+
       <section id="demo" className="px-8 py-20 bg-slate-900">
         <h2 className="text-3xl font-bold text-center mb-4">
           Interactive Prototype Demo
@@ -329,7 +413,7 @@ export default function App() {
            <input
              type="number"
              min="1"
-             max="20"
+             max="50"
              value={numMolecules}
              onChange={(e) => setNumMolecules(e.target.value)}
              className="w-32 bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-cyan-400"
